@@ -1,0 +1,57 @@
+<div class="bg-pink-50 h-screen">
+  <div class="md:px-24 md:py-20">
+    <p class="text-3xl text-pink-500 text-center font-bold underline">
+      ¡Listado de tareas compartidas!
+    </p>
+    <div
+      class="container mb-2 flex flex-col mx-auto w-full items-center justify-center mt-8"
+    >
+      <!-- Numero de personas conectadas -->
+      <div class="mb-4">
+        <p class="font-semibold">
+          {{ counter }}
+        </p>
+      </div>
+      <!-- Input para introducir tarea -->
+      <div
+        class="lg:w-1/3 p-6 border-pink-400 border-2 rounded-2xl flex mb-4 bg-white"
+      >
+        <input
+          type="text"
+          placeholder="Nueva tarea"
+          [(ngModel)]="newTask"
+          (keyup.enter)="sendTask()"
+        />
+        <button
+          type="button"
+          class="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-pink-500 hover:bg-pink-600 hover:shadow-lg justify-center items-center lg:ml-10 p-2"
+          (click)="sendTask()"
+        >
+          Añadir
+        </button>
+      </div>
+
+      <!-- Listado de tareas -->
+      <ul class="flex flex-col p-4 space-y-4 w-1/2" *ngIf="tasks.length >= 1">
+        <li class="border-gray-400 flex flex-row" *ngFor="let task of tasks">
+          <div
+            class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-6 hover:shadow-2xl border-purple-400 bg-white"
+          >
+            <div class="flex-1 pl-1 mr-16">
+              <div class="font-medium">
+                {{ task.description }}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg justify-center items-center mr-10 p-2"
+              (click)="deleteTask(task.id)"
+            >
+              Borrar
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
